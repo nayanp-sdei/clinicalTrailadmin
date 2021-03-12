@@ -1,0 +1,339 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Category List" routerLink="/dashboard" [hideBreadcrumbs]="true"><button class="btn btn-primary">Add</button>
+  </sb-dashboard-head> 
+  <div class="row justify-content-center">
+    <div class="col-sm-12">
+        <div class="card card-shadow mb-4">
+           <div class="card-header">
+            <ul class="nav nav-tabs nav-fill mb-4" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="cetogry-tab" data-toggle="tab" href="#cetogry" role="tab"
+                  aria-controls="cetogry" aria-selected="true">Category</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="subCategory-tab" data-toggle="tab" href="#subCategory" role="tab"
+                  aria-controls="subCategory" aria-selected="false">Sub-Category</a>
+              </li>
+              <li class="col-9 text-right ">
+                <button class="btn btn-primary" (click)="addToggleModal()">Add</button>
+              </li>
+            </ul>
+            <!--<div class="row">
+              <div class="col-12 text-right">
+                <button class="btn btn-info btn-sm mb-3" (click)="addToggleModal()">Add Category</button>
+              </div>
+            </div>-->
+          </div>  
+          <div class="card-body pt-0">
+            
+
+            
+
+
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="cetogry" role="tabpanel" aria-labelledby="cetogry-tab">
+                <p-table #dt [value]="category" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+                  [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                  [globalFilterFields]="['name','isStatus']">
+                  <!-- <p-table #dt class="admin-table custom-scroll-table" [value]="category" [rowHover]="true" [rows]="10"
+                  [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"> -->
+                  <ng-template pTemplate="caption">
+                    
+                    <div class="table-header">
+                      <div class="row">
+                       
+                          <div class="col-sm-12 col-md-6 ml-auto">
+                              <div class="dataTables_filter d-flex "><label class="d-flex ml-auto">List of Category <input pInputText type="text" class="form-control form-control-sm w-auto ml-2"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Search" /></label></div>
+                          </div>
+                      </div>
+                  </div>
+                  </ng-template>
+                  <ng-template pTemplate="header" let-columns>
+                    <tr class="primeTable">
+                      <th [pSortableColumn]="'name'">
+                        Category
+                        <p-sortIcon [field]="'name'" class="filter-icon" ariaLabel="Activate to sort"
+                          ariaLabelDesc="Activate to sort in descending order"
+                          ariaLabelAsc="Activate to sort in ascending order">
+                        </p-sortIcon>
+                      </th>
+                      <th [pSortableColumn]="'isstatus'">
+                        Status
+                        <!-- <p-sortIcon [field]="'isstatus'"  class="filter-icon" ariaLabel="Activate to sort"
+                          ariaLabelDesc="Activate to sort in descending order"
+                          ariaLabelAsc="Activate to sort in ascending order">
+                        </p-sortIcon> -->
+                      </th>
+                      <th>Actions</th>
+
+
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                      <td>{{rowData.name}}</td>
+                      <td>
+                        <div class="switchButton">
+                          <input type="checkbox" [(ngModel)]="rowData.isStatus" class="form-check-input toggle"
+                            id="toggle{{rowData.id}}" (click)="chk(rowData.id)">
+                          <label for="toggle{{rowData.id}}">
+                            <span class="on">Enable</span>
+                            <span class="off">Disable</span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <button type="button" (click)="editCategory(rowData.id)"> <i class="fa fa-edit"></i></button>
+                        <button type="button" (click)="getId(rowData.id)"><i class="fa fa-trash-o"></i></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+              <div class="tab-pane fade" id="subCategory" role="tabpanel" aria-labelledby="subCategory-tab">
+                <p-table #dl [value]="subcategory" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+                  [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                  [globalFilterFields]="['name','parentId.name','isStatus']">
+                  <ng-template pTemplate="caption">
+                    <div class="table-header">
+                      List of Sub-Category
+                      <span class="p-input-icon-left">
+                        <input pInputText type="text" (input)="dl.filterGlobal($event.target.value, 'contains')"
+                          placeholder="Search" />
+                        <!-- <i class="pi pi-search"></i> -->
+                      </span>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header" let-columns>
+                    <tr class="primeTable">
+                      <th [pSortableColumn]="'name'">
+                        Category
+                        <p-sortIcon [field]="'name'" class="filter-icon" ariaLabel="Activate to sort"
+                          ariaLabelDesc="Activate to sort in descending order"
+                          ariaLabelAsc="Activate to sort in ascending order">
+                        </p-sortIcon>
+                      </th>
+                      <th [pSortableColumn]="'name'">
+                        Sub-Category
+                        <p-sortIcon [field]="'name'" class="filter-icon" ariaLabel="Activate to sort"
+                          ariaLabelDesc="Activate to sort in descending order"
+                          ariaLabelAsc="Activate to sort in ascending order">
+                        </p-sortIcon>
+                      </th>
+                      <th [pSortableColumn]="'isstatus'">
+                        Status
+                        <!-- <p-sortIcon [field]="'isstatus'" class="filter-icon"  ariaLabel="Activate to sort"
+                          ariaLabelDesc="Activate to sort in descending order"
+                          ariaLabelAsc="Activate to sort in ascending order">
+                        </p-sortIcon> -->
+                      </th>
+                      <th>Actions</th>
+
+
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowDatas let-columns="columns">
+                    <tr>
+                      <td>{{rowDatas?.parentId?.name}}</td>
+                      <td>{{rowDatas.name}}</td>
+                      <td>
+                        <div class="switchButton">
+                          <input type="checkbox" [(ngModel)]="rowDatas.isStatus" class="form-check-input toggle"
+                            id="toggle{{rowDatas.id}}" (click)="chks(rowDatas.id)">
+                          <label for="toggle{{rowDatas.id}}">
+                            <span class="on">Enable</span>
+                            <span class="off">Disable</span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <button type="button" (click)="editSubCategory(rowDatas.id)"> <i
+                            class="fa fa-edit"></i></button>
+                        <button type="button" (click)="getIds(rowDatas.id)"><i class="fa fa-trash-o"></i></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+</sb-layout-dashboard>
+
+
+<div [style.display]="addModal ? 'block' : 'none'" class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Add Category</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <Form [formGroup]="addCategory">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Category- Parent</label>
+                <select class="form-control  custom-select" formControlName="parentId" id="parentId">
+                  <option value="">--Select Category- Parent --</option>
+                  <option *ngFor="let data of category" value="{{data.id}}">{{data.name}}</option>
+                </select>
+                <!-- <span class="text-danger"
+                  *ngIf="addCategory.controls['parentId'].hasError('required') && (addCategory.controls['parentId'].dirty || addCategory.controls['parentId'].touched)">This
+                  field is required</span> -->
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Category-Name</label>
+                <input type="text" class="form-control" formControlName="name">
+                <span class="text-danger"
+                  *ngIf="addCategory.controls['name'].hasError('required') && (addCategory.controls['name'].dirty || addCategory.controls['name'].touched)">This
+                  field is required</span>
+                <span class="text-danger"
+                  *ngIf="addCategory.controls['name'].hasError('validOnlyCharField') && (addCategory.controls['name'].dirty || addCategory.controls['name'].touched)">This
+                  field is required only charecter</span>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status </label>
+                <select class="form-control  custom-select" formControlName="isStatus" id="isStatus">
+                  <option value="">--Select Status --</option>
+                  <option value="true">Enable</option>
+                  <option value="false">Disable</option>
+                </select>
+                <span class="text-danger"
+                  *ngIf="addCategory.controls['isStatus'].hasError('required') && (addCategory.controls['isStatus'].dirty || addCategory.controls['isStatus'].touched)">This
+                  field is required</span>
+              </div>
+            </div>
+
+
+          </div>
+
+        </Form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-dismiss="modal" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [style.display]="EditModal ? 'block' : 'none'" class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Edit Category</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <Form [formGroup]="editForm">
+          <div class="row">
+            <div class="col-md-6" *ngIf="show==false">
+              <div class="form-group">
+                <label>Category- Parent</label>
+                <select class="form-control  custom-select" formControlName="parentId" id="parentId">
+                  <option value="">--Select Category- Parent --</option>
+                  <option *ngFor="let data of category" value="{{data.id}}">{{data.name}}</option>
+                </select>
+                <!-- <span class="text-danger"
+                  *ngIf="addCategory.controls['parentId'].hasError('required') && (addCategory.controls['parentId'].dirty || addCategory.controls['parentId'].touched)">This
+                  field is required</span> -->
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Category-Name</label>
+                <input type="text" class="form-control" formControlName="name">
+                <span class="text-danger"
+                  *ngIf="addCategory.controls['name'].hasError('required') && (addCategory.controls['name'].dirty || addCategory.controls['name'].touched)">This
+                  field is required</span>
+                <span class="text-danger"
+                  *ngIf="addCategory.controls['name'].hasError('validOnlyCharField') && (addCategory.controls['name'].dirty || addCategory.controls['name'].touched)">This
+                  field is required only charecter</span>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Status </label>
+                <select class="form-control  custom-select" formControlName="isStatus" id="isStatus">
+                  <option value="">--Select Status --</option>
+                  <option value="true">Enable</option>
+                  <option value="false">Disable</option>
+                </select>
+                <span class="text-danger"
+                  *ngIf="addCategory.controls['isStatus'].hasError('required') && (addCategory.controls['isStatus'].dirty || addCategory.controls['isStatus'].touched)">This
+                  field is required</span>
+              </div>
+            </div>
+
+
+          </div>
+
+        </Form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-dismiss="modal" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onUpdateCategory()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div [style.display]="catDeleteModel ? 'block' : 'none'" class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userModalLabel">Category Delete </h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Are you want to delete !</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-dismiss="modal" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="categoryDelete()">Delete</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [style.display]="SubCatModel ? 'block' : 'none'" class="modal" id="subModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="subModalLabel">Sub-Category Delete </h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="close()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Are you want to delete !</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-dismiss="modal" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="Delete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

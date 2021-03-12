@@ -1,0 +1,142 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Volunteer Update" routerLink="/dashboard" [hideBreadcrumbs]="false"><button>Add</button>
+    </sb-dashboard-head>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-1">
+                    <div class="card-body">
+
+                        <Form [formGroup]="editForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" formControlName="firstName">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['firstName'].hasError('required') && (editForm.controls['firstName'].dirty || editForm.controls['firstName'].touched)">This
+                                            field is required</span>
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['firstName'].hasError('validOnlyCharField') && (editForm.controls['firstName'].dirty || editForm.controls['firstName'].touched)">This
+                                            field is required only charecter</span>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" formControlName="lastName">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['lastName'].hasError('required') && (editForm.controls['lastName'].dirty || editForm.controls['lastName'].touched)">This
+                                            field is required</span>
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['lastName'].hasError('validOnlyCharField') && (editForm.controls['lastName'].dirty || editForm.controls['lastName'].touched)">This
+                                            field is required only charecter</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Date Of Birth</label>
+                                        <input type="text" class="form-control" formControlName="dob" bsDatepicker
+                                            #datepickerDMY="bsDatepicker"
+                                            [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['dob'].hasError('required') && (editForm.controls['dob'].dirty || editForm.controls['dob'].touched)">This
+                                            field is required</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>email</label>
+                                        <input type="text" class="form-control" formControlName="email">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['email'].hasError('required') && (editForm.controls['email'].dirty || editForm.controls['email'].touched)">This
+                                            field is required</span>
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['email'].hasError('validEmail') && (editForm.controls['email'].dirty || editForm.controls['email'].touched)">Please
+                                            enter valid email address</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Gender </label>
+                                        <select class="form-control  custom-select" formControlName="gender"
+                                            id="gender">
+                                            <option value="">--Select Gender --</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['gender'].hasError('required') && (editForm.controls['gender'].dirty || editForm.controls['gender'].touched)">This
+                                            field is required</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" class="form-control" formControlName="address">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['address'].hasError('required') && (editForm.controls['address'].dirty || editForm.controls['address'].touched)">This
+                                            field is required</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" class="form-control" formControlName="city">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['city'].hasError('required') && (editForm.controls['city'].dirty || editForm.controls['city'].touched)">This
+                                            field is required</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>State</label>
+                                        <input type="text" class="form-control" formControlName="state">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['state'].hasError('required') && (editForm.controls['state'].dirty || editForm.controls['state'].touched)">This
+                                            field is required</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Zip Code</label>
+                                        <input type="text" class="form-control" formControlName="zipCode">
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['zipCode'].hasError('required') && (editForm.controls['zipCode'].dirty || editForm.controls['zipCode'].touched)">This
+                                            field is required</span>
+                                        <span class="text-danger"
+                                            *ngIf="editForm.controls['zipCode'].hasError('pattern') && (editForm.controls['zipCode'].dirty || editForm.controls['zipCode'].touched)">This
+                                            field is required 5 digits</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    <!-- <span class="col-9 text-right"> -->
+                                    <button class="btn btn-info btn-sm mb-3" (click)="onSubmit()">Submit</button>
+                                    <!-- </span> -->
+
+                                </div>
+                            </div>
+                        </Form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</sb-layout-dashboard>

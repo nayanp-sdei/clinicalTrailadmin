@@ -1,0 +1,48 @@
+<sb-layout-auth>
+    <div class="login-page">
+        <div class="login-box">
+            <div class="logo">
+                <img src="/assets/images/logo.svg" />
+            </div>
+            <div class="startearning-form text-left">
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputEmailAddress">Email</label>
+                        <input class="form-control py-4" id="inputEmailAddress" type="email" class="form-control"
+                            placeholder="Enter email address" formControlName="email" />
+                        <div *ngIf="loginForm.controls['email'].errors && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
+                            class="text-left mt-2">
+                            <span class="text-danger small" *ngIf="loginForm.controls['email'].errors?.required">* Email
+                                is required.</span>
+                            <span class="text-danger small"
+                                *ngIf="loginForm.controls['email'].hasError('pattern') && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">Please
+                                enter valid email address</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputPassword">Password</label>
+                        <input class="form-control py-4" id="inputPassword" type="password" formControlName="password"
+                            class="form-control" placeholder="Enter password" />
+                        <div class="text-left mt-2"
+                            *ngIf="loginForm.controls['password'].errors && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                            <span class="text-danger small" *ngIf="loginForm.controls['password'].errors?.required">*
+                                Password is required.</span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group">
+                    <div class="custom-control custom-checkbox"><input class="custom-control-input"
+                            id="rememberPasswordCheck" type="checkbox" /><label class="custom-control-label"
+                            for="rememberPasswordCheck">Remember password</label></div>
+                </div> -->
+                    <div *ngIf="!submited" class="form-group mt-4 mb-0 text-center">
+                        <button class="btn btn-primary btn-block mb-2" type="submit">Login</button>
+                        <a class="small" routerLink="/auth/forgot-password">Forgot Password?</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</sb-layout-auth>

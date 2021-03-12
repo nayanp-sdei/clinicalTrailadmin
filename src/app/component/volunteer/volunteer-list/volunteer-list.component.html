@@ -1,0 +1,147 @@
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Volunteer List" routerLink="/dashboard" [hideBreadcrumbs]="true"><button>Add</button>
+    </sb-dashboard-head> 
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <div class="card card-shadow mb-4">
+                    <div class="card-header d-flex align-items-center">
+                        <div class="card-title">
+                            List of volunteer</div> <button class="btn btn-primary ml-auto">Add</button>
+                        
+                    </div>
+              
+                <div class="card-body">
+                    <p-table #dl [value]="volunteer" dataKey="id" styleClass="p-datatable-customers dataTables_wrapper dt-bootstrap4" [rowHover]="true"
+                        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [filterDelay]="0" [globalFilterFields]="['firstName','lastName','isStatus']">
+                        <ng-template pTemplate="caption">
+                            <div class="table-header">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length">
+                                            <label>Show <select name="bs4-table_length" class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label>
+                                        </div>
+
+                                    </div> 
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_filter"><label>Search: <input pInputText type="text" class="form-control form-control-sm"
+                                            (input)="dl.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search" /></label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns>
+                            <tr class="primeTable">
+                                <th [pSortableColumn]="'firstName'">
+                                    First Name
+                                    <p-sortIcon [field]="'firstName'" class="filter-icon" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'lastName'">
+                                    Last Name
+                                    <p-sortIcon [field]="'lastName'" class="filter-icon" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'email'">
+                                    Email
+                                    <p-sortIcon [field]="'email'" class="filter-icon" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'gender'">
+                                    Gender
+                                    <p-sortIcon [field]="'gender'" class="filter-icon" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'address'">
+                                    Address
+                                    <p-sortIcon [field]="'address'" class="filter-icon" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'dob'">
+                                    DOB
+                                    <p-sortIcon [field]="'dob'" class="filter-icon" ariaLabel="Activate to sort"
+                                        ariaLabelDesc="Activate to sort in descending order"
+                                        ariaLabelAsc="Activate to sort in ascending order">
+                                    </p-sortIcon>
+                                </th>
+                                <th [pSortableColumn]="'isstatus'">
+                                    Status
+                                </th>
+                                <th>Actions</th>
+
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td>{{rowData?.firstName}}</td>
+                                <td>{{rowData.lastName}}</td>
+                                <td>{{rowData.email}}
+                                <td>{{rowData.gender}}
+                                <td>{{rowData.address}}
+                                <td>{{rowData.dob | date }}
+                                <td><div class="switchButton">
+                                    <input type="checkbox" [(ngModel)]="rowData.isStatus" class="form-check-input toggle"
+                                      id="toggle{{rowData.id}}" (click)="chk(rowData.id)">
+                                    <label for="toggle{{rowData.id}}">
+                                      <span class="on">Enable</span>
+                                      <span class="off">Disable</span>
+                                    </label>
+                                  </div>
+                               </td>
+                                <td>
+                                    <button type="button">
+                                        <i class="fa fa-edit"(click)="edit(rowData.id)"></i></button>
+                                    <button type="button" (click)="getId(rowData.id)"><i class="fa fa-trash-o"></i></button>
+
+
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </div>
+            </div> 
+            </div>
+        </div>
+    
+
+</sb-layout-dashboard>
+
+<div [style.display]="DeleteModel ? 'block' : 'none'" class="modal" id="myModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userModalLabel">Volunteer Delete </h5>
+          <button type="button" class="close" data-dismiss="modal" (click)="close()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>Are you want to delete !</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-info" data-dismiss="modal" (click)="close()">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="Delete()">Delete</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,28 @@
+// Import Custom Variables
+@import "variables.scss";
+
+// Import Bootstrap
+@import '~ngx-toastr/toastr.css'; 
+@import "bootstrap/scss/bootstrap.scss";
+
+// Import Custom SCSS
+@import "global.scss";
+
+// Layout
+@import "layout/authentication.scss";
+@import "layout/dashboard-default.scss";
+@import "layout/dataTables.bootstrap4.min.css";
+@import "layout/dashboard-fixed.scss";
+@import "layout/error.scss";
+
+// Navigation
+@import "navigation/nav.scss";
+@import "navigation/topnav.scss";
+@import "navigation/sidenav/sidenav.scss";
+@import "navigation/sidenav/sidenav-dark.scss";
+@import "navigation/sidenav/sidenav-light.scss";
+
+// @import url("../../node_modules/primeicons/primeicons.css");
+// @import url("../../node_modules/primeng/resources/themes/saga-orange/theme.css");
+// @import url("../../node_modules/primeng/resources/primeng.min.css");
+// @import url("../../node_modules/font-awesome/css/font-awesome.min.css");

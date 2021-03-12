@@ -1,0 +1,51 @@
+<sb-layout-auth>
+    <div class="container">
+        <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="true">
+            <p style="font-size: 20px; color: white">Loading...</p>
+        </ngx-spinner>
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-4">Password Recovery</h3>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="otpForm">
+                            <div class="form-group">
+                                <label class="small mb-1" for="inputEmailAddress">New Password</label>
+                                <input class="form-control py-4" id="inputEmailAddress" type="password"
+                                    class="form-control" placeholder="Enter New  Password " formControlName="newPassword" />
+                            </div>
+                            <div style="text-align: left;"
+                                *ngIf="otpForm.controls['newPassword'].errors && (otpForm.controls['newPassword'].dirty || otpForm.controls['newPassword'].touched)">
+                                <span class=" text-danger error" *ngIf="otpForm.controls['newPassword'].errors?.required">
+                                    * New password is required.
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label class="small mb-1" for="inputEmailAddress">Confirm Password</label>
+                                <input class="form-control py-4" id="inputEmailAddress" type="password"
+                                    class="form-control" placeholder="Enter Confirm New Password " formControlName="confirmNewPassword" />
+                            </div>
+                            <div style="text-align: left;"
+                            *ngIf="otpForm.controls['confirmNewPassword'].errors && (otpForm.controls['confirmNewPassword'].dirty || otpForm.controls['confirmNewPassword'].touched)">
+                            <span class=" text-danger error" *ngIf="otpForm.controls['confirmNewPassword'].errors?.required">
+                                * Confirm New password is required.
+                            </span>
+                        </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"><a
+                                    class="small" routerLink="/auth/login">Return to login</a><a class="btn btn-primary"
+                                    (click)="onSubmit()">Reset Password</a></div>
+                            <!-- <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"><a
+                                    class="small" routerLink="/auth/login">Return to login</a><a class="btn btn-primary"
+                                    routerLink="/auth/login">Reset Password</a></div> -->
+                        </form>
+                    </div>
+                    <!-- <div class="card-footer text-center">
+                        <div class="small"><a routerLink="/auth/register">Need an account? Sign up!</a></div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</sb-layout-auth>

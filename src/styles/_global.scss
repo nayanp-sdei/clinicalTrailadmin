@@ -1,0 +1,193 @@
+// Global styling for this template
+/* Reset CSS
+========================================================================== */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; vertical-align: baseline; }
+    
+body { background: #E4F0FD; font-family: 'Montserrat', sans-serif; color: #000000; font-size: 16px; line-height: 1.5; font-weight: 400; overflow-x: hidden; }
+    
+/* Common CSS
+========================================================================== */
+ol, ul { list-style: none; }
+*:focus { outline: 0; }
+a, .btn { transition: all 0.5s ease; }
+a:active, a:hover, a:focus, .btn:focus, .btn:active, .btn:hover { outline: 0; }
+
+a { color: #4495E2; text-decoration: none; }
+a:focus, a:hover { color: #1C2654; text-decoration: none; }
+
+b, strong { font-weight: bold; }
+small { font-size: 80%; }
+sub, sup { font-size: 72%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.4em; }
+sub { bottom: -0.25em; }
+img { border: 0; vertical-align: middle; }
+hr { box-sizing: content-box; height: 0; }
+svg:not(:root) { overflow: hidden; }
+    
+.container { max-width: 1140px; width: 100%; }
+    
+.btn { border-radius: 4px; padding: 0.532rem 1.5rem; font-weight: 500; font-size: 14px;}
+.btn:hover, .btn:focus ,.btn:not(:disabled):not(.disabled):active, button:focus, input:focus{ box-shadow: none; outline: 0;}
+
+.btn-lg { padding: 1.157rem 1.5rem; }
+
+.btn-stepper{ font-size: 16px; font-weight: 400;}
+.btn-sm{font-size: 12px;padding: 0.313rem 0.941rem;}
+
+.btn-primary{ background: #86B9FF; border-color: #86B9FF; color: #ffffff; }
+.btn-primary:hover, .btn-primary:focus ,.btn-primary:not(:disabled):not(.disabled):active{ background: #218DF7; border-color: #218DF7; color: #ffffff;}
+
+.btn-green { background: #9EC753; color: #ffffff; border-color:#9EC753;  font-weight: 600;}
+.btn-green:hover, .btn-green:focus ,.btn-green:not(:disabled):not(.disabled):active{ background: #9EC753; border-color: #9EC753;  color: #ffffff;  }
+    
+.btn-border{ background: transparent; border: 0.5px solid #1C2654; color: #1C2654; font-weight: 600; }
+.btn-border:hover, .btn-border:focus ,.btn-border:not(:disabled):not(.disabled):active{ background: #1C2654; border-color: #1C2654; color: #ffffff;}
+
+.btn-white { background: #FFFFFF; border: 1px solid #FFFFFF; color: #218DF7; }
+.btn-white:hover, .btn-white:focus ,.btn-white:not(:disabled):not(.disabled):active{ background: #218DF7; border-color: #218DF7; color: #ffffff;}
+
+.text-green { color: #3DAB21;} 
+.text-blue{ color: #1C2654;}
+.text-lightblue{ color: #4495E2;}
+.text-orange{ color: #C08500; }
+.text-secondarygreen{ color: #6C9E10;} 
+
+
+
+.font-500{ font-weight: 500!important;}
+.font-600{ font-weight: 600!important;}
+.font-400 { font-weight: 400; }
+.text-underline{ text-decoration: underline;}
+p { margin-bottom: 1.5rem;}
+p:empty {display: none; }
+    
+// Set spacing on containers for page symmetry
+
+.container,
+.container-fluid {
+  padding-left: $grid-gutter-width;
+  padding-right: $grid-gutter-width;
+}
+
+
+
+
+.sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {
+  margin-right: 10px;
+  font-size: 13px;
+  color: #888888;
+}
+.sb-sidenav .sb-sidenav-menu .nav .nav-link {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  padding: 13px 20px;
+  font-size: 13.5px;
+  position: relative;
+  transition: all .5s;
+}
+.sb-sidenav .sb-sidenav-menu .nav .nav-link:hover {
+  background: #f5f5f5;
+  color: #111;
+}
+
+sb-dashboard-head h1 {
+  font-size: 22px;
+  margin: 0 0 22px;
+  color: #000;
+}
+
+.card {
+  position: relative;
+  margin-top: 0px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  &.card-shadow {
+    border: none;
+    box-shadow: 0 1px 3px 0px rgb(115 108 203 / 23%);
+  }
+  .card-header {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e9ec;
+    background: #fff;
+    .card-title {
+      margin-bottom: 0;
+      color: #53505f;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+  .card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+}
+
+
+.p-datatable .p-datatable-header {
+  background: transparent!important;
+  border: 0px!important;
+}
+
+.p-datatable-wrapper {}
+
+.p-datatable-wrapper table {
+  border: 1px solid #dee2e6;
+  margin: 6px 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.p-datatable-wrapper table td, .p-datatable-wrapper table th {
+  border: 1px solid #e5e9ec; 
+  padding: .75rem;
+}
+
+.p-datatable-wrapper table .p-datatable-thead tr th {
+  background: transparent;
+  border-color: #e5e9ec;
+  white-space: nowrap;
+}
+
+
+
+.p-datatable .p-datatable-thead > tr > td {}
+
+.p-datatable-wrapper table .p-datatable-thead tr th p-sorticon {
+  position: relative;
+  right: 5px;
+}
+
+.p-datatable-wrapper table .p-datatable-thead tr th p-sorticon i {
+  font-size: 13px;
+}
+
+.p-datatable .p-datatable-tbody > tr > td button {
+  border: 0px;
+  font-size: 18px;
+  background: #86B9FF;
+  margin: 0px 4px;
+  color: #fff;
+  border-radius: 2px;
+  width: 30px;
+  font-size: 15px;
+  height: 30px;
+}
+
+.p-datatable .p-datatable-tbody > tr > td button:hover {
+  background: #218DF7;
+}
+
+.p-paginator-bottom {
+  font-size: 13px;
+}
+
+.p-datatable .p-datatable-header {
+  background: transparent;
+  border: 0px;
+  padding: 0 0 15px;
+}
+.p-datatable .p-datatable-tbody > tr:nth-of-type(odd) {
+  background-color: rgba(0,0,0,.01);
+}
